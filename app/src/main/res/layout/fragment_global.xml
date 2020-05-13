@@ -10,5 +10,12 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
         android:text="Global"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_global"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="8dp" />
 </LinearLayout>

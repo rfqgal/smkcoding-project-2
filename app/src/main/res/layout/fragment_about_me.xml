@@ -12,7 +12,8 @@
         android:layout_marginVertical="8dp"
         android:text="About Me"
         android:textAlignment="center"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:layout_width="match_parent"
