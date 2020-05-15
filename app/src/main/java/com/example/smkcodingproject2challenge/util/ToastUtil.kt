@@ -1,4 +1,4 @@
-package com.example.smkcodingproject2.util
+package com.example.smkcodingproject2challenge.util
 
 import android.content.Context
 import android.widget.Toast

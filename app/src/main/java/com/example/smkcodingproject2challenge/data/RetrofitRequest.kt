@@ -1,11 +1,10 @@
-package com.example.smkcodingproject2.data
+package com.example.smkcodingproject2challenge.data
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 fun httpClient(): OkHttpClient {
@@ -25,7 +24,7 @@ inline fun <reified T> apiRequest(okHttpClient: OkHttpClient): T {
     val gson = GsonBuilder().create()
 
     val retrofit = Retrofit.Builder()
-        .baseUrl("https://api.github.com/")
+        .baseUrl("https://api.kawalcorona.com/")
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()

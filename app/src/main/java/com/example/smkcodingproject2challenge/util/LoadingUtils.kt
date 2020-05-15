@@ -1,9 +1,9 @@
-package com.example.smkcodingproject2.util
+package com.example.smkcodingproject2challenge.util
 
 import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.smkcodingproject2.R
+import com.example.smkcodingproject2challenge.R
 
 fun showLoading(context: Context, swipeRefreshLayout: SwipeRefreshLayout) {
     swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(context, R.color.colorPrimary))
