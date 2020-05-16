@@ -7,13 +7,13 @@ data class Covid19ProvinsiItem(
     @SerializedName("FID")
     val fID: Int,
     @SerializedName("Kasus_Meni")
-    val kasusMeninggal: Int,
+    val kasusMeninggal: String,
     @SerializedName("Kasus_Posi")
-    val kasusPositif: Int,
+    val kasusPositif: String,
     @SerializedName("Kasus_Semb")
-    val kasusSembuh: Int,
+    val kasusSembuh: String,
     @SerializedName("Kode_Provi")
-    val kodeProvinsi: Int,
+    val kodeProvinsi: String,
     @SerializedName("Provinsi")
     val provinsi: String
 )
