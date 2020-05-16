@@ -14,7 +14,7 @@
             android:id="@+id/tv_global_country"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="4"
             android:text="Country"
             android:textSize="18sp"
             android:gravity="center" />
