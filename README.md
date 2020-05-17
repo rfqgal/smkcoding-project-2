@@ -1,7 +1,7 @@
 # smkcoding-project-2
 Project Android Kotlin menggunakan ViewPager, TabLayout, Fragment, RecyclerView, RestAPI, dan Retrofit.
 
-link apk : <https://drive.google.com/file/d/1DKH94y16WNfwdznDteRXuMi8_P6KAGZi/view/>
+link apk : https://drive.google.com/open?id=1DKH94y16WNfwdznDteRXuMi8_P6KAGZi
 
 Screenshot 1, Menjelaskan secara singkat tentang apa itu COVID-19 : <https://drive.google.com/open?id=112G3K0PYRpavOpNd47F1UZoNWXglI-HS/>
 
