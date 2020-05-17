@@ -57,7 +57,6 @@ class FragmentProvinsi: Fragment() {
                 response: Response<List<Covid19ProvinsiItem>>
             ) {
                 dismissLoading(srl_provinsi)
-                Log.d("response", response.toString())
 
                 when {
                     response.isSuccessful ->
@@ -83,7 +82,7 @@ class FragmentProvinsi: Fragment() {
         rv_provinsi.adapter = AdapterProvinsi(context!!, provinsiData) {
 
             val data = it
-            showToast(context!!, data.provinsi)
+            showToast(context!!, data.attributes.provinsi)
         }
     }
 
