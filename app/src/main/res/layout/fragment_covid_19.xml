@@ -10,6 +10,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
         android:text="About Covid-19"
+        android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold" />
 </LinearLayout>

@@ -29,10 +29,13 @@ class AdapterProvinsi(
     class ViewHolder(private val context: Context, override val containerView: View):
         RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bindItem(item: Covid19ProvinsiItem, listener: (Covid19ProvinsiItem) -> Unit) {
+            val aktif = item.attributes.kasusPosi - item.attributes.kasusMeni - item.attributes.kasusSemb
+
             containerView.tv_provinsi_nama.text = item.attributes.provinsi
             containerView.tv_provinsi_positif.text = item.attributes.kasusPosi.toString()
             containerView.tv_provinsi_sembuh.text = item.attributes.kasusSemb.toString()
             containerView.tv_provinsi_meninggal.text = item.attributes.kasusMeni.toString()
+            containerView.tv_provinsi_aktif.text = aktif.toString()
 
             containerView.setOnClickListener { listener(item) }
         }
