@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "770216618946",
+    "firebase_url": "https://login-auth-219e2.firebaseio.com",
+    "project_id": "login-auth-219e2",
+    "storage_bucket": "login-auth-219e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770216618946:android:457d4d0bd09c409d53c45b",
+        "android_client_info": {
+          "package_name": "com.example.smkcodingproject2challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770216618946-br79ajup78q4f0auo43fu6gta555l064.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmTUIl7dIjmtRGOH_NJegc3M6QtL-Lp8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770216618946-br79ajup78q4f0auo43fu6gta555l064.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
