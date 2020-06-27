@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Url
 
 interface Covid19NewsService {
-    @GET()
-    fun getNewsData(url: String): Call<List<Covid19NewsIndonesiaArticle>>
+    @GET("/v2/top-headlines?q=covid-19&country=id&apiKey=0fd4957dbc674991839a37e799305911")
+    fun getNewsData(): Call<List<Covid19NewsIndonesiaArticle>>
 }
