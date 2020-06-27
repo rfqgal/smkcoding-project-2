@@ -24,4 +24,15 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter
             }
         }
     }
+
+    private fun getPageTitle(position: Int): CharSequence {
+        val titleList = arrayOf(
+            "Tentang Covid-19",
+            "Data Global",
+            "Data Indonesia",
+            "Data Provinsi",
+            "Profil User"
+        )
+        return titleList[position]
+    }
 }

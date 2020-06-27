@@ -22,8 +22,23 @@ class MainActivity : AppCompatActivity() {
         val adapter = ViewPagerAdapter(this)
         view_pager.adapter = adapter
         TabLayoutMediator(tab_layout, view_pager, TabLayoutMediator.TabConfigurationStrategy {
-                tab, position ->
-            tab.icon = ResourcesCompat.getDrawable(resources, menuIcon[position], null)
+                tab, position -> tab.icon = ResourcesCompat.getDrawable(resources, menuIcon[position], null)
         }).attach()
+        /*
+        if (intent.extras != null) {
+            val fragment = intent.extras!!.getInt("fragment")
+
+            when (fragment) {
+                0 -> view_pager.currentItem = 0
+                1 -> view_pager.currentItem = 1
+                2 -> view_pager.currentItem = 2
+                3 -> view_pager.currentItem = 3
+                4 -> view_pager.currentItem = 4
+                else -> {
+                    view_pager.currentItem = 0
+                }
+            }
+        }
+        */
     }
 }

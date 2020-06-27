@@ -55,23 +55,25 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.btn_login_google -> {
-                startActivityForResult(
-                    AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(listOf(AuthUI.IdpConfig.GoogleBuilder().build()))
-                        .setIsSmartLockEnabled(false)
-                        .build(),
-                    RC_SIGN_IN
-                )
-                progress.visibility = View.VISIBLE
-            }
+            R.id.btn_login_google -> signInGoogle()
             R.id.btn_login_email -> signIn()
             R.id.btn_sign_up -> {
                 val intent = Intent(applicationContext, RegisterActivity::class.java)
                 startActivity(intent)
             }
         }
+    }
+
+    private fun signInGoogle() {
+        startActivityForResult(
+            AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(listOf(AuthUI.IdpConfig.GoogleBuilder().build()))
+                .setIsSmartLockEnabled(false)
+                .build(),
+            RC_SIGN_IN
+        )
+        progress.visibility = View.VISIBLE
     }
 
     private fun signIn() {

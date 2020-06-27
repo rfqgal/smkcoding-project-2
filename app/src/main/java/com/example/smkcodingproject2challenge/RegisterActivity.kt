@@ -20,7 +20,7 @@ class RegisterActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         btn_register.setOnClickListener {
-            createAccount(edt_email_signup.text.toString(), edt_password_signup.text.toString())
+            createAccount(edt_email.text.toString(), edt_password.text.toString())
         }
     }
 
