@@ -17,8 +17,6 @@ import android.graphics.Bitmap as Bitmap
 
 class UpdateUserActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val REQUEST_CODE = 100
-
     private lateinit var newPhoto: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,13 +26,10 @@ class UpdateUserActivity : AppCompatActivity(), View.OnClickListener {
         progress.visibility = View.GONE
 
         val name = intent.getStringExtra("name")
-        val email = intent.getStringExtra("email")
 
         val editableName = SpannableStringBuilder(name)
-        val editableEmail = SpannableStringBuilder(email)
 
         edt_name.text = editableName
-        edt_email.text = editableEmail
 
         btn_cancel.setOnClickListener(this)
         btn_update.setOnClickListener(this)
@@ -47,7 +42,6 @@ class UpdateUserActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
                 finish()
             }
-            R.id.edt_photo -> openGalleryForImage()
             R.id.btn_update -> updateUserProfile()
         }
     }
@@ -68,32 +62,10 @@ class UpdateUserActivity : AppCompatActivity(), View.OnClickListener {
                     if (task.isSuccessful) {
                         showToast(this, "Profil telah berhasil diupdate")
                         val intent = Intent(this, MainActivity::class.java)
-                        /*
-                        intent.putExtra("fragment", 4)
-                        */
                         startActivity(intent)
                         finish()
                     }
                 }
-        }
-    }
-
-    private fun openGalleryForImage() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-        startActivityForResult(intent, REQUEST_CODE)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
-            val selectedImage = data!!.data
-            try {
-                newPhoto = MediaStore.Images.Media.getBitmap(contentResolver, selectedImage)
-            } catch (e: FileNotFoundException) {
-                e.printStackTrace()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
         }
     }
 }

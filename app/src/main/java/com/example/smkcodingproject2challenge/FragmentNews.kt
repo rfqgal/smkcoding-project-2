@@ -44,9 +44,7 @@ class FragmentNews: Fragment() {
         val httpClient = httpClient()
         val apiRequest = apiNewsRequest<Covid19NewsService>(httpClient)
 
-        val call = apiRequest.getNewsData(
-            "https://newsapi.org/v2/top-headlines?q=covid-19&country=id&apiKey=0fd4957dbc674991839a37e799305911"
-        )
+        val call = apiRequest.getNewsData()
         call.enqueue(object : Callback<List<Covid19NewsIndonesiaArticle>> {
 
             override fun onFailure(call: Call<List<Covid19NewsIndonesiaArticle>>, t: Throwable) {

@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="8dp"
             android:layout_marginTop="16dp"
             android:text="Email :" />
 
@@ -22,21 +22,21 @@
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="8dp"
             android:layout_marginBottom="16dp"
             android:inputType="textEmailAddress" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="8dp"
             android:text="Password :" />
 
         <EditText
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="8dp"
             android:layout_marginBottom="16dp"
             android:inputType="textPassword" />
 
@@ -44,7 +44,9 @@
             android:id="@+id/btn_login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="8dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="#FFF"
             android:text="Login" />
 
         <TextView
@@ -58,7 +60,9 @@
             android:id="@+id/btn_sign_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="8dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="#FFF"
             android:text="Sign Up" />
 
         <TextView
@@ -72,7 +76,7 @@
             android:id="@+id/btn_login_google"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp" />
+            android:layout_marginHorizontal="8dp" />
     </LinearLayout>
 
     <ProgressBar
