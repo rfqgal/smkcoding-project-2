@@ -6,20 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.smkcodingproject2challenge.api.Covid19GlobalItem
-import com.example.smkcodingproject2challenge.data.Covid19GlobalService
-import com.example.smkcodingproject2challenge.data.apiRequest
+import com.example.smkcodingproject2challenge.api.Covid19NewsIndonesiaArticle
+import com.example.smkcodingproject2challenge.data.Covid19NewsService
+import com.example.smkcodingproject2challenge.data.apiNewsRequest
 import com.example.smkcodingproject2challenge.data.httpClient
 import com.example.smkcodingproject2challenge.util.dismissLoading
 import com.example.smkcodingproject2challenge.util.showLoading
 import com.example.smkcodingproject2challenge.util.showToast
 import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.fragment_global.*
+import kotlinx.android.synthetic.main.fragment_covid_19.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FragmentGlobal: Fragment() {
+class FragmentNews: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,38 +30,40 @@ class FragmentGlobal: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_global, container, false)
+        return inflater.inflate(R.layout.fragment_covid_19, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        callApiGetGlobalData()
+        callApiGetNewsData()
     }
 
-    private fun callApiGetGlobalData() {
-        showLoading(context!!, srl_global)
+    private fun callApiGetNewsData() {
+        showLoading(context!!, srl_news)
 
         val httpClient = httpClient()
-        val apiRequest = apiRequest<Covid19GlobalService>(httpClient)
+        val apiRequest = apiNewsRequest<Covid19NewsService>(httpClient)
 
-        val call = apiRequest.getGlobalData("https://api.kawalcorona.com")
-        call.enqueue(object : Callback<List<Covid19GlobalItem>> {
+        val call = apiRequest.getNewsData(
+            "https://newsapi.org/v2/top-headlines?q=covid-19&country=id&apiKey=0fd4957dbc674991839a37e799305911"
+        )
+        call.enqueue(object : Callback<List<Covid19NewsIndonesiaArticle>> {
 
-            override fun onFailure(call: Call<List<Covid19GlobalItem>>, t: Throwable) {
-                dismissLoading(srl_global)
+            override fun onFailure(call: Call<List<Covid19NewsIndonesiaArticle>>, t: Throwable) {
+                dismissLoading(srl_news)
             }
 
             override fun onResponse(
-                call: Call<List<Covid19GlobalItem>>,
-                response: Response<List<Covid19GlobalItem>>
+                call: Call<List<Covid19NewsIndonesiaArticle>>,
+                response: Response<List<Covid19NewsIndonesiaArticle>>
             ) {
-                dismissLoading(srl_global)
+                dismissLoading(srl_news)
 
                 when {
                     response.isSuccessful ->
                         when {
                             response.body()?.size != 0 ->
-                                showGlobal(response.body()!!)
+                                showNews(response.body()!!)
 
                             else -> {
                                 showToast(context!!, "Berhasil")
@@ -76,13 +78,14 @@ class FragmentGlobal: Fragment() {
         })
     }
 
-    private fun showGlobal(globalData: List<Covid19GlobalItem>) {
-        rv_global.layoutManager = LinearLayoutManager(context)
-        rv_global.adapter = AdapterGlobal(context!!, globalData) {
+    private fun showNews(newsData: List<Covid19NewsIndonesiaArticle>) {
+        rv_news.layoutManager = LinearLayoutManager(context)
+        rv_news.adapter = AdapterNews(context!!, newsData) {
 
             val data = it
-            showToast(context!!, data.attributes.countryRegion)
+            showToast(context!!, data.title)
         }
+
     }
 
     override fun onDestroy() {

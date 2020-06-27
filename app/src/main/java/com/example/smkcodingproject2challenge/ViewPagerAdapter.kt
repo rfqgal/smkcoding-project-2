@@ -14,13 +14,13 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter
 
     override fun createFragment(position: Int): Fragment {
         when (position) {
-            0 -> { return FragmentCovid19() }
+            0 -> { return FragmentNews() }
             1 -> { return FragmentGlobal() }
             2 -> { return FragmentIndonesia() }
             3 -> { return FragmentProvinsi() }
             4 -> { return FragmentAboutMe() }
             else -> {
-                return FragmentCovid19()
+                return FragmentNews()
             }
         }
     }
