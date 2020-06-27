@@ -1,7 +1,6 @@
 package com.example.smkcodingproject2challenge
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -38,9 +37,21 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
 
         tvMyName.text = name
         tvMyEmail.text = email
-        Glide.with(context!!)
-            .load(photo)
-            .into(imgMyPhoto)
+
+        if (tvMyName.text == "") {
+            val anonymous = "Anonymous"
+            tvMyName.text = anonymous
+        }
+
+        if (photo != null) {
+            Glide.with(context!!)
+                .load(photo)
+                .into(imgMyPhoto)
+        } else {
+            Glide.with(context!!)
+                .load(R.drawable.ic_user)
+                .into(imgMyPhoto)
+        }
 
         btn_logout.setOnClickListener(this)
         btn_edit.setOnClickListener(this)
@@ -59,7 +70,7 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
         AlertDialog.Builder(activity)
             .setTitle("Logout")
             .setMessage("Apakah Anda yakin akan keluar?")
-            .setPositiveButton("Ya", DialogInterface.OnClickListener { dialog, which -> signOut() })
+            .setPositiveButton("Ya") { dialog, which -> signOut() }
             .setNegativeButton("Tidak", null)
             .show()
     }
@@ -86,7 +97,7 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
         AlertDialog.Builder(activity)
             .setTitle("Hapus Akun")
             .setMessage("Apakah Anda yakin untuk menghapus akun Anda?")
-            .setPositiveButton("Ya", DialogInterface.OnClickListener { dialog, which -> deleteProfile() })
+            .setPositiveButton("Ya") { dialog, which -> deleteProfile() }
             .setNegativeButton("Tidak", null)
             .show()
     }
@@ -96,6 +107,9 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
             .addOnCompleteListener{ task ->
                 if (task.isSuccessful) {
                     showToast(activity!!, "Akun Anda telah berhasil dihapus")
+                    val intent = Intent(activity, LoginActivity::class.java)
+                    startActivity(intent)
+                    activity!!.finish()
                 }
             }
     }

@@ -18,7 +18,7 @@
             android:layout_marginTop="16dp"
             android:text="Email :" />
 
-        <EditText
+        <com.firebase.ui.auth.ui.phone.SpacedEditText
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,13 +40,12 @@
             android:layout_marginBottom="16dp"
             android:inputType="textPassword" />
 
-        <Button
+        <com.google.android.gms.common.internal.SignInButtonImpl
             android:id="@+id/btn_login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:text="Login"
-            android:translationZ="2dp" />
+            android:text="Login" />
 
         <TextView
             android:layout_width="match_parent"
@@ -60,8 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:text="Sign Up"
-            android:translationZ="2dp" />
+            android:text="Sign Up" />
 
         <TextView
             android:layout_width="match_parent"
@@ -70,13 +68,11 @@
             android:text="Or"
             android:textAlignment="center" />
 
-        <Button
+        <com.google.android.gms.common.SignInButton
             android:id="@+id/btn_login_google"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:text="Sign in with Google"
-            android:translationZ="2dp" />
+            android:layout_marginHorizontal="16dp" />
     </LinearLayout>
 
     <ProgressBar

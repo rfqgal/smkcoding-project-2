@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
+import com.example.smkcodingproject2challenge.util.showToast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -37,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
                     finish()
                 } else {
                     Log.e(TAG, "createAccount: Fail!", task.exception)
-                    Toast.makeText(applicationContext, "Authentication failed!", Toast.LENGTH_SHORT).show()
+                    showToast(applicationContext, "Authentication failed!")
                 }
             }
     }
@@ -45,17 +46,17 @@ class RegisterActivity : AppCompatActivity() {
     private fun validateForm(email: String, password: String): Boolean {
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(applicationContext, "Enter email address!", Toast.LENGTH_SHORT).show()
+            showToast(applicationContext, "Enter email address!")
             return false
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(applicationContext, "Enter password!", Toast.LENGTH_SHORT).show()
+            showToast(applicationContext, "Enter password!")
             return false
         }
 
         if (password.length < 6) {
-            Toast.makeText(applicationContext, "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show()
+            showToast(applicationContext, "Password too short, enter minimum 6 characters!")
             return false
         }
 

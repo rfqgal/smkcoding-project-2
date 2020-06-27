@@ -42,7 +42,11 @@ class UpdateUserActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.btn_cancel -> finish()
+            R.id.btn_cancel -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
             R.id.edt_photo -> openGalleryForImage()
             R.id.btn_update -> updateUserProfile()
         }
