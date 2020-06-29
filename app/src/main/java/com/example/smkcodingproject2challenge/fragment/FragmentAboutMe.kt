@@ -8,15 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.smkcodingproject2challenge.LoginActivity
+import com.example.smkcodingproject2challenge.*
 import com.example.smkcodingproject2challenge.R
-import com.example.smkcodingproject2challenge.UpdateUserActivity
+import com.example.smkcodingproject2challenge.adapter.AdapterAboutMe
 import com.example.smkcodingproject2challenge.util.showToast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_about_me.*
 
 class FragmentAboutMe: Fragment(), View.OnClickListener {
+
+    lateinit var ref: DatabaseReference
+    lateinit var auth: FirebaseAuth
+    lateinit var dataIdentitas: ArrayList<ProfileModel>
 
     private val user = FirebaseAuth.getInstance().currentUser
     private val name = user!!.displayName
@@ -37,6 +44,7 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getData()
 
         tvMyName.text = name
         tvMyEmail.text = email
@@ -47,11 +55,11 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
         }
 
         if (photo != null) {
-            Glide.with(context!!)
+            Glide.with(requireContext())
                 .load(photo)
                 .into(imgMyPhoto)
         } else {
-            Glide.with(context!!)
+            Glide.with(requireContext())
                 .load(R.drawable.ic_user)
                 .into(imgMyPhoto)
         }
@@ -59,6 +67,7 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
         btn_logout.setOnClickListener(this)
         btn_edit.setOnClickListener(this)
         btn_delete.setOnClickListener(this)
+        btn_add.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -66,7 +75,46 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
             R.id.btn_logout -> signOutConfirm()
             R.id.btn_edit -> updateProfile()
             R.id.btn_delete -> deleteConfirm()
+            R.id.btn_add -> addProfile()
         }
+    }
+
+    private fun addProfile() {
+        val intent = Intent(activity, UpdateProfileActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun getData() {
+        showToast(requireContext(), "Mohon tunggu...")
+        auth = FirebaseAuth.getInstance()
+
+        val getUserID = auth.currentUser?.uid.toString()
+        ref = FirebaseDatabase.getInstance().reference
+
+        ref.child(getUserID).child("Identity").addValueEventListener(object: ValueEventListener {
+
+            override fun onCancelled(error: DatabaseError) {
+                showToast(context!!, "Database error...")
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                dataIdentitas = java.util.ArrayList<ProfileModel>()
+                for (snapshot in dataSnapshot.children) {
+                    val identity = snapshot.getValue(ProfileModel::class.java)
+                    identity?.key = snapshot.key.toString()
+                    dataIdentitas.add(identity!!)
+                }
+                rv_identity.layoutManager = LinearLayoutManager(context)
+                rv_identity.adapter = AdapterAboutMe(context!!, dataIdentitas)
+
+                showToast(context!!, "Data berhasil dimuat")
+            }
+        })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        this.clearFindViewByIdCache()
     }
 
     private fun signOutConfirm() {
@@ -83,7 +131,7 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
         val intent = Intent(activity, LoginActivity::class.java)
         Toast.makeText(activity, "Anda telah keluar", Toast.LENGTH_SHORT).show()
         startActivity(intent)
-        activity!!.finish()
+        activity?.finish()
     }
 
     private fun updateProfile() {
@@ -93,7 +141,7 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
             intent.putExtra("email", email)
         }
         startActivity(intent)
-        activity!!.finish()
+        activity?.finish()
     }
 
     private fun deleteConfirm() {
@@ -109,10 +157,10 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
         FirebaseAuth.getInstance().currentUser!!.delete()
             .addOnCompleteListener{ task ->
                 if (task.isSuccessful) {
-                    showToast(activity!!, "Akun Anda telah berhasil dihapus")
+                    showToast(requireActivity(), "Akun Anda telah berhasil dihapus")
                     val intent = Intent(activity, LoginActivity::class.java)
                     startActivity(intent)
-                    activity!!.finish()
+                    requireActivity().finish()
                 }
             }
     }

@@ -25,11 +25,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FragmentIndonesia: Fragment(), (Covid19IndonesiaItem) -> Unit {
+class FragmentIndonesia: Fragment()/*, (Covid19IndonesiaItem) -> Unit*/ {
 
-    var dataIndonesia: MutableList<Covid19IndonesiaItem> = ArrayList()
-    private val viewModel by viewModels<Covid19IndonesiaFragmentViewModel>()
-    private var adapter: AdapterIndonesia? = null
+//    var dataIndonesia: MutableList<Covid19IndonesiaItem> = ArrayList()
+//    private val viewModel by viewModels<Covid19IndonesiaFragmentViewModel>()
+//    private var adapter: AdapterIndonesia? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,21 +45,23 @@ class FragmentIndonesia: Fragment(), (Covid19IndonesiaItem) -> Unit {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
+//        init()
         callApiGetIndonesiaData()
+        /*
         viewModel.init(requireContext())
         viewModel.allIndonesiaItems.observe(viewLifecycleOwner, Observer { indonesiaItems ->
             indonesiaItems?.let { adapter?.notifyDataSetChanged() }
         })
+        */
     }
-
+/*
     private fun init() {
         rv_indonesia.layoutManager = LinearLayoutManager(context)
-        adapter = AdapterIndonesia(requireContext(), dataIndonesia)
+        adapter = AdapterIndonesia(requireContext(), dataIndonesia, adapter!!.listener)
         rv_indonesia.adapter = adapter
         adapter?.listener = this
     }
-
+*/
     private fun callApiGetIndonesiaData() {
         showLoading(requireContext(), srl_indonesia)
 
@@ -115,4 +117,9 @@ class FragmentIndonesia: Fragment(), (Covid19IndonesiaItem) -> Unit {
         super.onDestroy()
         this.clearFindViewByIdCache()
     }
+/*
+    override fun invoke(p1: Covid19IndonesiaItem) {
+        TODO("Not yet implemented")
+    }
+*/
 }
