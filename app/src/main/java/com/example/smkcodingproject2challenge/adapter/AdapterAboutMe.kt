@@ -38,7 +38,7 @@ class AdapterAboutMe(
         lateinit var ref: DatabaseReference
         lateinit var auth: FirebaseAuth
 
-        holder.containerView.setOnLongClickListener { v: View? ->
+        holder.containerView.btn_more.setOnClickListener { v: View? ->
             val action = arrayOf("Update", "Delete")
             val alert = AlertDialog.Builder(v!!.context)
             alert.setItems(action) { dialog, i ->

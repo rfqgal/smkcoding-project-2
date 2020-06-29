@@ -19,6 +19,8 @@ class AddIdentityActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_identity)
 
+        title = "Add Identity"
+
         progress.visibility = View.GONE
 
         ref = FirebaseDatabase.getInstance().reference

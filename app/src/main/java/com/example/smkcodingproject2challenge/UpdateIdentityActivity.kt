@@ -24,6 +24,9 @@ class UpdateIdentityActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_identity)
+
+        title = "Update Identity"
+
         progress.visibility = View.GONE
         supportActionBar?.title = "Update Data"
 
@@ -31,6 +34,12 @@ class UpdateIdentityActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().reference
 
         getData()
+
+        btn_cancel.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         btn_update.setOnClickListener {
             newCategory = new_category.text.toString()

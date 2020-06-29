@@ -106,8 +106,6 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
                 }
                 rv_identity.layoutManager = LinearLayoutManager(context)
                 rv_identity.adapter = AdapterAboutMe(context!!, dataIdentitas)
-
-                showToast(context!!, "Data berhasil dimuat")
             }
         })
     }
