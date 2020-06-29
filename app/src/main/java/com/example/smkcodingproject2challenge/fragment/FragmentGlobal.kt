@@ -1,4 +1,4 @@
-package com.example.smkcodingproject2challenge
+package com.example.smkcodingproject2challenge.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.smkcodingproject2challenge.adapter.AdapterGlobal
+import com.example.smkcodingproject2challenge.R
 import com.example.smkcodingproject2challenge.api.Covid19GlobalItem
 import com.example.smkcodingproject2challenge.data.Covid19GlobalService
 import com.example.smkcodingproject2challenge.data.apiRequest
@@ -78,11 +80,15 @@ class FragmentGlobal: Fragment() {
 
     private fun showGlobal(globalData: List<Covid19GlobalItem>) {
         rv_global.layoutManager = LinearLayoutManager(context)
-        rv_global.adapter = AdapterGlobal(context!!, globalData) {
+        rv_global.adapter =
+            AdapterGlobal(
+                context!!,
+                globalData
+            ) {
 
-            val data = it
-            showToast(context!!, data.attributes.countryRegion)
-        }
+                val data = it
+                showToast(context!!, data.attributes.countryRegion)
+            }
     }
 
     override fun onDestroy() {

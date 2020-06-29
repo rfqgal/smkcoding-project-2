@@ -1,13 +1,13 @@
-package com.example.smkcodingproject2challenge
+package com.example.smkcodingproject2challenge.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.smkcodingproject2challenge.R
 import com.example.smkcodingproject2challenge.api.Covid19ProvinsiItem
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_provinsi.*
 import kotlinx.android.synthetic.main.item_provinsi.view.*
 
 class AdapterProvinsi(
@@ -16,7 +16,14 @@ class AdapterProvinsi(
 ) : RecyclerView.Adapter<AdapterProvinsi.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(context, LayoutInflater.from(context).inflate(R.layout.item_provinsi, parent, false))
+        ViewHolder(
+            context,
+            LayoutInflater.from(context).inflate(
+                R.layout.item_provinsi,
+                parent,
+                false
+            )
+        )
 
     override fun getItemCount(): Int {
         return items.size
