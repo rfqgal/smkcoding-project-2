@@ -1,6 +1,5 @@
 package com.example.smkcodingproject2challenge
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,16 +8,16 @@ import com.example.smkcodingproject2challenge.util.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_update_profile.*
+import kotlinx.android.synthetic.main.activity_add_identity.*
 
-class UpdateProfileActivity : AppCompatActivity() {
+class AddIdentityActivity : AppCompatActivity() {
 
     lateinit var ref: DatabaseReference
     private var auth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_update_profile)
+        setContentView(R.layout.activity_add_identity)
 
         progress.visibility = View.GONE
 

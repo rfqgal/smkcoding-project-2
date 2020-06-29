@@ -30,5 +30,6 @@
             android:layout_weight="1"
             android:gravity="end|center_vertical"
             android:text="Field" />
+        
     </LinearLayout>
 </androidx.cardview.widget.CardView>

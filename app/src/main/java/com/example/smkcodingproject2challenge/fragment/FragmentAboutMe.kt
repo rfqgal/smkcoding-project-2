@@ -80,7 +80,7 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
     }
 
     private fun addProfile() {
-        val intent = Intent(activity, UpdateProfileActivity::class.java)
+        val intent = Intent(activity, AddIdentityActivity::class.java)
         startActivity(intent)
     }
 

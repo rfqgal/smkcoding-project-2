@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UpdateProfileActivity"></activity>
+        <activity android:name=".UpdateIdentityActivity"></activity>
+        <activity android:name=".AddIdentityActivity" />
         <activity android:name=".UpdateUserActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">
