@@ -8,4 +8,5 @@
     <string name="covid19_paragraph_6">Selain virus SARS-CoV-2 atau virus Corona, virus yang juga termasuk dalam kelompok ini adalah virus penyebab Severe Acute Respiratory Syndrome (SARS) dan virus penyebab Middle-East Respiratory Syndrome (MERS). Meski disebabkan oleh virus dari kelompok yang sama, yaitu coronavirus, COVID-19 memiliki beberapa perbedaan dengan SARS dan MERS, antara lain dalam hal kecepatan penyebaran dan keparahan gejala.</string>
     <string name="facebook_app_id">192941515438717</string>
     <string name="fb_login_protocol_scheme">fb192941515438717</string>
+    <string name="msg_token_fmt">Message Token</string>
 </resources>
