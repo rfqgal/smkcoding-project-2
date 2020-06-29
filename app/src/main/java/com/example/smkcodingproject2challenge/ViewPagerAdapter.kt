@@ -23,7 +23,7 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter
             }
             3 -> { return FragmentProvinsi()
             }
-            4 -> { return FragmentAboutMe()
+            4 -> { return FragmentProfile()
             }
             else -> {
                 return FragmentNews()

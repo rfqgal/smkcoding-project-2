@@ -8,22 +8,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Glide.init
 import com.example.smkcodingproject2challenge.*
 import com.example.smkcodingproject2challenge.R
-import com.example.smkcodingproject2challenge.adapter.AdapterAboutMe
+import com.example.smkcodingproject2challenge.adapter.AdapterProfile
 import com.example.smkcodingproject2challenge.util.showToast
+import com.example.smkcodingproject2challenge.viewmodel.ProfileFragmentViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_about_me.*
 
-class FragmentAboutMe: Fragment(), View.OnClickListener {
+class FragmentProfile: Fragment(), View.OnClickListener, AdapterProfile.dataListener {
 
     lateinit var ref: DatabaseReference
     lateinit var auth: FirebaseAuth
-    lateinit var dataIdentitas: ArrayList<ProfileModel>
+
+    var dataIdentitas: MutableList<ProfileModel> = ArrayList()
+    private val viewModel by viewModels<ProfileFragmentViewModel>()
+    private var adapter: AdapterProfile? = null
 
     private val user = FirebaseAuth.getInstance().currentUser
     private val name = user!!.displayName
@@ -32,19 +39,6 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_about_me, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        getData()
 
         tvMyName.text = name
         tvMyEmail.text = email
@@ -68,6 +62,32 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
         btn_edit.setOnClickListener(this)
         btn_delete.setOnClickListener(this)
         btn_add.setOnClickListener(this)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_about_me, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
+        getData()
+        viewModel.init(requireContext())
+        viewModel.allIdentities.observe(viewLifecycleOwner, Observer { identities ->
+            identities?.let { adapter?.setData(it) }
+        })
+    }
+
+    private fun init() {
+        rv_identity.layoutManager = LinearLayoutManager(context)
+        adapter = AdapterProfile(requireContext(), dataIdentitas)
+        rv_identity.adapter = adapter
+        adapter?.listener = this
+
     }
 
     override fun onClick(v: View?) {
@@ -98,14 +118,13 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                dataIdentitas = java.util.ArrayList<ProfileModel>()
+                dataIdentitas = ArrayList()
                 for (snapshot in dataSnapshot.children) {
                     val identity = snapshot.getValue(ProfileModel::class.java)
                     identity?.key = snapshot.key.toString()
                     dataIdentitas.add(identity!!)
                 }
-                rv_identity.layoutManager = LinearLayoutManager(context)
-                rv_identity.adapter = AdapterAboutMe(context!!, dataIdentitas)
+                viewModel.insertAll(dataIdentitas)
             }
         })
     }
@@ -113,6 +132,23 @@ class FragmentAboutMe: Fragment(), View.OnClickListener {
     override fun onDestroy() {
         super.onDestroy()
         this.clearFindViewByIdCache()
+    }
+
+    override fun onDeleteData(profileModel: ProfileModel, position: Int) {
+        auth = FirebaseAuth.getInstance()
+        val getUserID: String = auth?.currentUser?.uid.toString()
+        if (ref != null) {
+            ref.child(getUserID)
+                .child("Identity")
+                .child(profileModel?.key!!.toString())
+                .removeValue()
+                .addOnSuccessListener {
+                    showToast(requireContext(), "Data berhasil dihapus")
+                    viewModel.delete(profileModel)
+                }
+        } else {
+            showToast(requireContext(), profileModel!!.key!!.toString())
+        }
     }
 
     private fun signOutConfirm() {
